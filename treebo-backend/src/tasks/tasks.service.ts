@@ -12,7 +12,21 @@ export class TasksService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto) {
-    return this.taskRepository.save(createTaskDto);
+    return await this.taskRepository.save(createTaskDto)
+    .then(() => {
+      return {
+        message: 'Task created successfully',
+        data: createTaskDto,
+        status: 201,
+      };
+    })
+    .catch(() => {
+      return {
+        message: 'Error creating the task',
+        data: {},
+        status: 500,
+      };
+    });
   }
 
   async findAll() {
@@ -24,10 +38,37 @@ export class TasksService {
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
-    return this.taskRepository.update({ id: id }, updateTaskDto);
+    return await this.taskRepository.update({ id: id }, updateTaskDto)
+    .then(() => {
+      return {
+        message: 'Task updated successfully',
+        data: updateTaskDto,
+        status: 201,
+      };
+    })
+    .catch(() => {
+      return {
+        message: 'Error updating task',
+        data: {},
+        status: 500,
+      };
+    });
   }
 
   async remove(id: number) {
-    return this.taskRepository.delete({ id: id });
+    return await this.taskRepository.delete({ id: id })
+    .then(() => {
+      return {
+        message: 'Task deleted successfully',
+        id: id,
+        status: 201,
+      };
+    })
+    .catch(() => {
+      return {
+        message: 'Error deleting task',
+        status: 500,
+      };
+    });;
   }
 }
