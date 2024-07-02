@@ -11,23 +11,23 @@ export class TasksService {
     private taskRepository: Repository<Task>,
   ) {}
 
-  create(createTaskDto: CreateTaskDto) {
-    return 'This action adds a new task';
+  async create(createTaskDto: CreateTaskDto) {
+    return this.taskRepository.save(createTaskDto);
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  async findAll() {
+    return this.taskRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: number) {
+    return this.taskRepository.findOneBy({ id: id });
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    return this.taskRepository.update({ id: id }, updateTaskDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  async remove(id: number) {
+    return this.taskRepository.delete({ id: id });
   }
 }
