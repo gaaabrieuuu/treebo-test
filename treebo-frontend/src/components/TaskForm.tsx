@@ -7,7 +7,7 @@ interface Props {
 }
 
 const TaskForm: React.FC<Props> = ({ onClick }) => {
-  const [values, setValues] = React.useState<Task>({} as Task);
+  const [values, setValues] = React.useState<Task>({ status: false } as Task);
 
   const newTask = () => {
     createTask(values).then((response: any) => {
