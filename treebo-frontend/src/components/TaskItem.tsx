@@ -1,6 +1,7 @@
 import React from "react";
 import Task from "../services/task.type";
 import { Close, Create } from "react-ionicons";
+import { patchTask, deleteTask } from "../services/task.service";
 
 interface Props {
   data?: Task;
@@ -14,18 +15,27 @@ const TaskItem: React.FC<Props> = ({ data }) => {
     title: data?.title,
     description: data?.description,
     date: data?.date,
-    status: true,
+    status: data?.status,
   });
 
   const editTask = () => {
-    console.log(values)
+    console.log(values);
+    patchTask(values.id as number, values).then((response: any) => {
+      console.log(response);
+    });
+  };
+
+  const excludeTask = () => {
+    deleteTask(values.id as number).then((response: any) => {
+      console.log(response);
+    });
   };
 
   return (
     <>
       <div className="w-full rounded-md border-solid border-2 gap-2 border-sky-950">
         <div className="w-full h-10 p-2 rounded-md flex flex-row items-center justify-between text-cyan-950 font-semibold">
-          <h2 className="truncate">Banho no cachorro</h2>
+          <h2 className="truncate">{values?.title}</h2>
           <div className="flex flex-row gap-2">
             <button
               onClick={() => {
@@ -54,7 +64,9 @@ const TaskItem: React.FC<Props> = ({ data }) => {
             <div className="w-full gap-2 p-2 flex flex-row items-center justify-between text-cyan-950 font-semibold">
               <h2 className="truncate">Deseja continuar?</h2>
               <div className="flex flex-row gap-2">
-                <button className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold">
+                <button 
+                onClick={() => excludeTask()}
+                className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold">
                   Apagar
                 </button>
                 <button
@@ -108,7 +120,9 @@ const TaskItem: React.FC<Props> = ({ data }) => {
               </div>
               <div className="flex flex-row gap-2">
                 <button
-                  onClick={() => {editTask()}}
+                  onClick={() => {
+                    editTask();
+                  }}
                   className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold"
                 >
                   Editar
