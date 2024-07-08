@@ -12,12 +12,16 @@ export class TasksService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto) {
-    return await this.taskRepository.save(createTaskDto)
+
+    const createTaskDtoDB: CreateTaskDto = new CreateTaskDto();
+    Object.assign(createTaskDtoDB, createTaskDto);
+
+    return await this.taskRepository.save(createTaskDtoDB.get())
     .then(() => {
       return {
         message: 'Task created successfully',
-        data: createTaskDto,
-        status: 201,
+        data: createTaskDtoDB,
+        status: 200,
       };
     })
     .catch(() => {
@@ -43,7 +47,7 @@ export class TasksService {
       return {
         message: 'Task updated successfully',
         data: updateTaskDto,
-        status: 201,
+        status: 200,
       };
     })
     .catch(() => {
@@ -61,7 +65,7 @@ export class TasksService {
       return {
         message: 'Task deleted successfully',
         id: id,
-        status: 201,
+        status: 200,
       };
     })
     .catch(() => {

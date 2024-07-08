@@ -10,12 +10,9 @@ const App = () => {
   const [isVisible, setIsVisible] = React.useState<boolean>(false)
 
   React.useEffect(() => {
-    console.log(process.env.REACT_APP_API_BASE_URL)
     getTasks().then(
       (response: any) => {
-        console.log(response, "#data_Home")
         setData(response)
-        console.log(data)
       }
     )
   }, []);
