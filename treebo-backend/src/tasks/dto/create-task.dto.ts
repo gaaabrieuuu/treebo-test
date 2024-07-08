@@ -22,4 +22,13 @@ export class CreateTaskDto {
   @ApiProperty()
   @Column()
   status: boolean;
+
+  get() {
+    return {
+      title: this.title,
+      description: this.description,
+      date: this.date,
+      status: this.status ? this.status : false,
+    };
+  }
 }

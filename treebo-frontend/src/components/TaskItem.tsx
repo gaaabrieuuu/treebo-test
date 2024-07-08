@@ -32,7 +32,6 @@ const TaskItem: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <>
       <div className="w-full rounded-md border-solid border-2 gap-2 border-sky-950">
         <div className="w-full h-10 p-2 rounded-md flex flex-row items-center justify-between text-cyan-950 font-semibold">
           <h2 className="truncate">{values?.title}</h2>
@@ -60,27 +59,25 @@ const TaskItem: React.FC<Props> = ({ data }) => {
           </div>
         </div>
         {showDeleteView && (
-          <div>
-            <div className="w-full gap-2 p-2 flex flex-row items-center justify-between text-cyan-950 font-semibold">
-              <h2 className="truncate">Deseja continuar?</h2>
-              <div className="flex flex-row gap-2">
-                <button 
+          <div className="w-full gap-2 p-2 flex flex-row items-center justify-between text-cyan-950 font-semibold transition ease-in-out duration-300">
+            <h2 className="truncate">Deseja continuar?</h2>
+            <div className="flex flex-row gap-2">
+              <button
                 onClick={() => excludeTask()}
-                className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold">
-                  Apagar
-                </button>
-                <button
-                  onClick={() => setShowDeleteView(false)}
-                  className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold"
-                >
-                  Cancelar
-                </button>
-              </div>
+                className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold"
+              >
+                Apagar
+              </button>
+              <button
+                onClick={() => setShowDeleteView(false)}
+                className="border-solid border-2 hover:opacity-50 border-sky-950 px-2 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold"
+              >
+                Cancelar
+              </button>
             </div>
           </div>
         )}
         {showEditView && (
-          <div>
             <div className="w-full gap-2 p-2 flex flex-col text-cyan-950 font-semibold">
               <h2 className="truncate">Título</h2>
               <input
@@ -135,10 +132,8 @@ const TaskItem: React.FC<Props> = ({ data }) => {
                 </button>
               </div>
             </div>
-          </div>
         )}
       </div>
-    </>
   );
 };
 
