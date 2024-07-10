@@ -1,11 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'tasks' })
 export class Task {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ length: 500 })
+  @Column()
   title: string;
 
   @Column('text')
@@ -14,6 +14,6 @@ export class Task {
   @Column('datetime')
   date: Date;
 
-  @Column()
+  @Column({ default: false })
   status: boolean;
 }

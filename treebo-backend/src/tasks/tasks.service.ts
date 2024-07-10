@@ -13,14 +13,11 @@ export class TasksService {
 
   async create(createTaskDto: CreateTaskDto) {
 
-    const createTaskDtoDB: CreateTaskDto = new CreateTaskDto();
-    Object.assign(createTaskDtoDB, createTaskDto);
-
-    return await this.taskRepository.save(createTaskDtoDB.get())
+    return await this.taskRepository.save(createTaskDto)
     .then(() => {
       return {
         message: 'Task created successfully',
-        data: createTaskDtoDB,
+        data: createTaskDto,
         status: 200,
       };
     })
@@ -37,11 +34,11 @@ export class TasksService {
     return this.taskRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return this.taskRepository.findOneBy({ id: id });
   }
 
-  async update(id: number, updateTaskDto: UpdateTaskDto) {
+  async update(id: string, updateTaskDto: UpdateTaskDto) {
     return await this.taskRepository.update({ id: id }, updateTaskDto)
     .then(() => {
       return {
@@ -50,7 +47,8 @@ export class TasksService {
         status: 200,
       };
     })
-    .catch(() => {
+    .catch((e:any) => {
+      console.error(e)
       return {
         message: 'Error updating task',
         data: {},
@@ -59,7 +57,7 @@ export class TasksService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.taskRepository.delete({ id: id })
     .then(() => {
       return {
