@@ -17,7 +17,7 @@ const TaskItem: React.FC<Props> = ({ data }) => {
     date: data.date,
     status: data.status,
   });
-
+  
   const editTask = () => {
     console.log(values);
     patchTask(values.id, values).then((response: any) => {
@@ -101,6 +101,7 @@ const TaskItem: React.FC<Props> = ({ data }) => {
               <input
                 className="border-solid border-1 border-sky-950 px-2 rounded-md "
                 type="datetime-local"
+                defaultValue={values.date as any}
                 onChange={(e) =>
                   setValues({ ...values, date: new Date(e.target.value) })
                 }
