@@ -1,9 +1,9 @@
 interface Task {
-  id: number | undefined;
-  title: string | undefined;
-  description: string | undefined;
-  date: Date | undefined;
-  status: boolean | undefined;
+  id: string;
+  title: string;
+  description: string;
+  date: Date;
+  status: boolean;
 }
 
 export default Task;
