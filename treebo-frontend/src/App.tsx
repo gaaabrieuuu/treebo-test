@@ -6,15 +6,13 @@ import Task from "./services/task.type";
 import TaskForm from "./components/TaskForm";
 
 const App = () => {
-  const [data, setData] = React.useState<Task[]>([])
-  const [isVisible, setIsVisible] = React.useState<boolean>(false)
+  const [data, setData] = React.useState<Task[]>([]);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    getTasks().then(
-      (response: any) => {
-        setData(response)
-      }
-    )
+    getTasks().then((response: any) => {
+      setData(response);
+    });
   }, []);
 
   return (
@@ -26,17 +24,18 @@ const App = () => {
             <h1 className="text-3xl text-cyan-950 font-semibold">To-Do App</h1>
           </div>
           <button
-          onClick={() => setIsVisible(true)}
-          className="border-solid border-2 hover:opacity-50 border-sky-950 px-4 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold">
+            onClick={() => setIsVisible(true)}
+            className="border-solid border-2 hover:opacity-50 border-sky-950 px-4 my-1 rounded-md flex flex-row items-center text-cyan-950 font-semibold"
+          >
             <Add color={"#082f49"} height="20px" width="20px" />
             Nova Tarefa
           </button>
         </header>
         <div className="w-full h-0.5 bg-sky-950 my-3"></div>
-        <TaskList data={data}></TaskList>
+        {data.length < 1 ? <h3 className="text-base text-cyan-950 m-auto">Nenhuma tarefa registrada!</h3> : <TaskList data={data}></TaskList>}
       </main>
       {isVisible && <TaskForm onClick={() => setIsVisible(false)}></TaskForm>}
-      </>
+    </>
   );
 };
 
