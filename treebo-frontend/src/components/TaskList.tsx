@@ -8,7 +8,7 @@ interface Props {
 
 const TaskList: React.FC<Props> = ({ data }) => {
   return (
-    <div className="mt-2 flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       {data?.map((data: any, index) => (
         <TaskItem key={index} data={data}></TaskItem>
       ))}
