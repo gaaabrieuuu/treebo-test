@@ -4,29 +4,29 @@ import { Close, Create } from "react-ionicons";
 import { patchTask, deleteTask } from "../services/task.service";
 
 interface Props {
-  data?: Task;
+  data: Task;
 }
 
 const TaskItem: React.FC<Props> = ({ data }) => {
   const [showDeleteView, setShowDeleteView] = React.useState<boolean>(false);
   const [showEditView, setShowEditView] = React.useState<boolean>(false);
   const [values, setValues] = React.useState<Task>({
-    id: data?.id,
-    title: data?.title,
-    description: data?.description,
-    date: data?.date,
-    status: data?.status,
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    date: data.date,
+    status: data.status,
   });
 
   const editTask = () => {
     console.log(values);
-    patchTask(values.id as number, values).then((response: any) => {
+    patchTask(values.id, values).then((response: any) => {
       console.log(response);
     });
   };
 
   const excludeTask = () => {
-    deleteTask(values.id as number).then((response: any) => {
+    deleteTask(values.id).then((response: any) => {
       console.log(response);
     });
   };

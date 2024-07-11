@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <>
-      <main className="w-full xl:w-1/3 p-5 m-auto my-16 bg-cyan-100 rounded-md">
+      <main className="w-full md:w-1/2 xl:w-1/3 p-5 m-auto my-16 bg-cyan-100 rounded-md">
         <header className="flex flex-row justify-between">
           <div className="flex flex-row items-center justify-center">
             <Checkbox color={"#082f49"} height="50px" width="50px" />
@@ -32,7 +32,7 @@ const App = () => {
             Nova Tarefa
           </button>
         </header>
-        <div className="w-full h-0.5 bg-sky-950"></div>
+        <div className="w-full h-0.5 bg-sky-950 my-3"></div>
         <TaskList data={data}></TaskList>
       </main>
       {isVisible && <TaskForm onClick={() => setIsVisible(false)}></TaskForm>}
