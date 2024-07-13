@@ -1,12 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTaskDto {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Task title.',
+  })
   title: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Task description.',
+  })
   description: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: Date,
+    description: 'Task date.',
+  })
   date: Date;
 }
