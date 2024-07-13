@@ -18,14 +18,14 @@ export class TasksService {
       return {
         message: 'Task created successfully',
         data: createTaskDto,
-        status: 200,
+        status: 201,
       };
     })
     .catch(() => {
       return {
         message: 'Error creating the task',
         data: {},
-        status: 500,
+        status: 400,
       };
     });
   }
@@ -52,7 +52,7 @@ export class TasksService {
       return {
         message: 'Error updating task',
         data: {},
-        status: 500,
+        status: 400,
       };
     });
   }
@@ -69,7 +69,7 @@ export class TasksService {
     .catch(() => {
       return {
         message: 'Error deleting task',
-        status: 500,
+        status: 400,
       };
     });;
   }

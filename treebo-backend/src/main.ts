@@ -9,7 +9,6 @@ async function bootstrap() {
     .setTitle('Task')
     .setDescription('Task API with a simple CRUD')
     .setVersion('1.0')
-    .addTag('task')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document, {
