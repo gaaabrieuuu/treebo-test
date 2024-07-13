@@ -1,5 +1,6 @@
 import axios from "axios";
 import Task from "./task.type";
+import { CreateTaskDto } from "./dto/create-task.dto";
 
 const getTasks = async () => {
   try {
@@ -13,7 +14,7 @@ const getTasks = async () => {
   }
 };
 
-const createTask = async (data: Task) => {
+const createTask = async (data: CreateTaskDto) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/tasks`,
