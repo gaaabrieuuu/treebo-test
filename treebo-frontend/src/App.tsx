@@ -8,9 +8,6 @@ import TaskForm from "./components/TaskForm";
 const App = () => {
   const [data, setData] = React.useState<Task[]>([]);
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
-  const [taskCreated, setTaskCreated] = React.useState<boolean>(false);
-
-  console.log("Renderizei pae");
 
   React.useEffect(() => {
     getTasks().then((response: Task[]) => {
@@ -23,11 +20,9 @@ const App = () => {
     if (result) {
       getTasks().then((response: Task[]) => {
         setData(response);
-        console.log(data)
-        setTaskCreated(false);
       });
     }
-  }
+  };
 
   return (
     <>

@@ -1,7 +1,6 @@
 import React from "react";
 import { createTask } from "../services/task.service";
 import { z } from "zod";
-import { CreateTaskDto } from "../services/dto/create-task.dto";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -9,7 +8,7 @@ import {
   CheckmarkDoneCircle,
   CloseCircle,
 } from "react-ionicons";
-import { MoonLoader, PulseLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 
 interface Props {
   onClick?: () => void;
@@ -34,6 +33,8 @@ const TaskSchema = z.object({
     }),
 });
 
+type CreateTaskFormData = z.infer<typeof TaskSchema>
+
 const TaskForm: React.FC<Props> = ({ onClick, result }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSuccessful, setIsSuccessful] = React.useState(false);
@@ -43,11 +44,11 @@ const TaskForm: React.FC<Props> = ({ onClick, result }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateTaskFormData>({
     resolver: zodResolver(TaskSchema),
   });
 
-  const formSubmit = (data: any) => {
+  const formSubmit = (data: CreateTaskFormData) => {
     setIsLoading(true);
     createTask(data).then((response: any) => {
       if (response.status === 201) {
