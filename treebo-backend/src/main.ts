@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
+  app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('Task')
@@ -12,7 +14,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document, {
-    customSiteTitle: 'Backend Generator',
+    customSiteTitle: 'ToDo Backend Docs',
     customfavIcon: 'https://avatars.githubusercontent.com/u/7658037?s=48&v=4',
     customJs: [
       'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.min.js',
@@ -25,6 +27,6 @@ async function bootstrap() {
     ],
   });
 
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();
