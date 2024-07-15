@@ -1,5 +1,6 @@
 import axios from "axios";
-import Task from "./task.type";
+import { CreateTaskDto } from "./dto/create-task.dto";
+import { UpdateTaskDto } from "./dto/update-task.dto";
 
 const getTasks = async () => {
   try {
@@ -13,7 +14,7 @@ const getTasks = async () => {
   }
 };
 
-const createTask = async (data: Task) => {
+const createTask = async (data: CreateTaskDto) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/tasks`,
@@ -26,7 +27,7 @@ const createTask = async (data: Task) => {
   }
 };
 
-const patchTask = async (id: string, data: Task) => {
+const patchTask = async (id: string | undefined, data: UpdateTaskDto) => {
   try {
     const response = await axios.patch(
       `${process.env.REACT_APP_API_BASE_URL}/tasks/${id}`,
@@ -39,7 +40,7 @@ const patchTask = async (id: string, data: Task) => {
   }
 };
 
-const deleteTask = async (id: string) => {
+const deleteTask = async (id: string | undefined) => {
   try {
     const response = await axios.delete(
       `${process.env.REACT_APP_API_BASE_URL}/tasks/${id}`

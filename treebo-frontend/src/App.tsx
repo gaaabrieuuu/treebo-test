@@ -10,10 +10,19 @@ const App = () => {
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    getTasks().then((response: any) => {
+    getTasks().then((response: Task[]) => {
       setData(response);
     });
   }, []);
+
+  const handleTaskCreated = (result: boolean) => {
+    setIsVisible(false);
+    if (result) {
+      getTasks().then((response: Task[]) => {
+        setData(response);
+      });
+    }
+  };
 
   return (
     <>
@@ -32,9 +41,20 @@ const App = () => {
           </button>
         </header>
         <div className="w-full h-0.5 bg-sky-950 my-3"></div>
-        {data.length < 1 ? <h3 className="text-base text-cyan-950 m-auto">Nenhuma tarefa registrada!</h3> : <TaskList data={data}></TaskList>}
+        {data.length < 1 ? (
+          <h3 className="text-base text-cyan-950 m-auto">
+            Nenhuma tarefa registrada!
+          </h3>
+        ) : (
+          <TaskList data={data}></TaskList>
+        )}
       </main>
-      {isVisible && <TaskForm onClick={() => setIsVisible(false)}></TaskForm>}
+      {isVisible && (
+        <TaskForm
+          result={handleTaskCreated}
+          onClick={() => setIsVisible(false)}
+        ></TaskForm>
+      )}
     </>
   );
 };
