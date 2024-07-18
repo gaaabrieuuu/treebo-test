@@ -24,16 +24,14 @@ const TaskSchema = z.object({
     .string()
     .min(3, "A descrição precisa ter mais que 3 caracteres.")
     .max(200, "A descrição precisa ter menos que 200 caracteres."),
-  date: z
-    .string()
-    .min(1, "Esse campo é obrigatório.")
-    .transform((str) => new Date(str))
+  date: z.coerce
+    .date({ message: "Esse campo é obrigatório." })
     .refine((data) => data > new Date(), {
       message: "Não é possível realizar uma tarefa em uma data passada.",
     }),
 });
 
-type CreateTaskFormData = z.infer<typeof TaskSchema>
+type CreateTaskFormData = z.infer<typeof TaskSchema>;
 
 const TaskForm: React.FC<Props> = ({ onClick, result }) => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -59,7 +57,6 @@ const TaskForm: React.FC<Props> = ({ onClick, result }) => {
         setIsError(true);
       }
     });
-    console.log(data);
   };
 
   if (isLoading || isSuccessful || isError) {
@@ -119,6 +116,7 @@ const TaskForm: React.FC<Props> = ({ onClick, result }) => {
           onSubmit={handleSubmit(formSubmit)}
           className="w-full gap-2 p-2 flex flex-col text-cyan-950 font-semibold"
         >
+          
           <h2 className="truncate">Título</h2>
           <input
             {...register("title")}
