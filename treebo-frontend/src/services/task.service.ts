@@ -27,7 +27,7 @@ const createTask = async (data: CreateTaskDto) => {
   }
 };
 
-const patchTask = async (id: string | undefined, data: UpdateTaskDto) => {
+const patchTask = async (id: string, data: UpdateTaskDto) => {
   try {
     const response = await axios.patch(
       `${process.env.REACT_APP_API_BASE_URL}/tasks/${id}`,
@@ -40,7 +40,7 @@ const patchTask = async (id: string | undefined, data: UpdateTaskDto) => {
   }
 };
 
-const deleteTask = async (id: string | undefined) => {
+const deleteTask = async (id: string) => {
   try {
     const response = await axios.delete(
       `${process.env.REACT_APP_API_BASE_URL}/tasks/${id}`
