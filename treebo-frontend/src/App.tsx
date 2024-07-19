@@ -15,10 +15,10 @@ const App = () => {
     });
   }, []);
 
-  const handleTaskCreated = (result: boolean) => {
+  const handleTaskCreated = async (result: boolean) => {
     setIsVisible(false);
     if (result) {
-      getTasks().then((response: Task[]) => {
+      await getTasks().then((response: Task[]) => {
         setData(response);
       });
     }
